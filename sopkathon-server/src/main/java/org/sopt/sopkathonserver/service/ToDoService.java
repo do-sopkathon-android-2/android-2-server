@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.sopt.sopkathonserver.controller.dto.request.ToDoCreateRequest;
 import org.sopt.sopkathonserver.domain.ToDo;
 import org.sopt.sopkathonserver.domain.User;
+import org.sopt.sopkathonserver.exception.ErrorMessage;
+import org.sopt.sopkathonserver.exception.model.NotFoundException;
 import org.sopt.sopkathonserver.repository.ToDoRepository;
 import org.sopt.sopkathonserver.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -30,4 +32,11 @@ public class ToDoService {
         return toDo.getId().toString();
     }
 
+    @Transactional
+    public void delete(final Long todoId) {
+        ToDo toDo = toDoRepository.findById(todoId).orElseThrow(
+                () -> new NotFoundException(ErrorMessage.TODO_NOT_FOUND_ERROR)
+        );
+        toDoRepository.delete(toDo);
+    }
 }
