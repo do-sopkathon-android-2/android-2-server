@@ -1,4 +1,6 @@
 # 마.미.타 (마이 미라클 타임)
+<img src = "https://github.com/do-sopkathon-android-2/android-2-server/assets/79795051/79e4ece4-6e79-4cb6-983d-d6823ba1cd71.png" width = 400 />
+
 당신만의 미라클 타임을 찾아드려요.
 
 # 기술 스택
@@ -8,11 +10,44 @@ JDK 17
 Spring 3.0.2
 MySQL 8.0.32
 ```
+# 실행 방법 
+```
+git clone https://github.com/do-sopkathon-android-2/android-2-server.git
+cd android-2-server/sokathon-server
+./gradlew build -x test
+cd build/libs
+java -jar [JAR 파일 이름]
+```
+
+# 패키지 구조
+```java
+└── 🗂️ src
+    ├── 🗂️ main
+    │   ├── 🗂️ java/org/sopt/sopkathonserver
+    │   │               ├── 🗂️ common
+    │   │               │   └── 🗂️ advice
+    │   │               ├── 🗂️ controller
+    │   │               │   └── 🗂️ dto
+    │   │               │       ├── 🗂️ request
+    │   │               │       └── 🗂️ response
+    │   │               ├── 🗂️ domain
+    │   │               │   └── 🗂️ enums
+    │   │               ├── 🗂️ exception
+    │   │               │   └── 🗂️ model
+    │   │               ├── 🗂️ repository
+    │   │               └── 🗂️ service
+    │   └── 🗂️ resources
+    └── 🗂️ test
+```
 # 팀원 소개
 | 도소현  | 이나경|
 |:----------|:----------|
 |<img src = "https://github.com/do-sopkathon-android-2/android-2-server/assets/79795051/7f4d47dc-5f67-4348-92a5-554c480db53c.png" width = "250"/>| <img src = "https://github.com/do-sopkathon-android-2/android-2-server/assets/79795051/6da3c590-7d75-4e8e-8e16-32ba3917c66e.png" width = "250"/> |
 |  DO SOPT 서버파트 OB | DO SOPT 서버파트 YB |
+
+# Architecture
+![image](https://github.com/do-sopkathon-android-2/android-2-server/assets/79795051/1a11b4a1-06d3-4313-b6b8-2f8d196b7140)
+
 # Git Convention
 
 ### 📌 Issue
