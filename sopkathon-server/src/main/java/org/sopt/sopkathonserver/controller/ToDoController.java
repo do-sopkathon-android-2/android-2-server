@@ -3,16 +3,13 @@ package org.sopt.sopkathonserver.controller;
 import lombok.RequiredArgsConstructor;
 import org.sopt.sopkathonserver.common.ApiResponse;
 import org.sopt.sopkathonserver.controller.dto.request.ToDoCreateRequest;
+import org.sopt.sopkathonserver.controller.dto.response.ToDoGetResponse;
 import org.sopt.sopkathonserver.exception.SuccessMessage;
 import org.sopt.sopkathonserver.service.ToDoService;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/todo-list")
@@ -33,5 +30,11 @@ public class ToDoController {
     public ApiResponse<Void> deleteToDo(@PathVariable final Long todoId) {
         toDoService.delete(todoId);
         return ApiResponse.success(SuccessMessage.TODO_DELETE_SUCCESS);
+    }
+
+
+    @GetMapping("{userId}")
+    public ApiResponse<List<ToDoGetResponse>> getToDos(@PathVariable Long userId, @RequestParam String timeTag) {
+        return ApiResponse.success(SuccessMessage.TODO_FILTERED_LIST_GET_SUCCESS, toDoService.findByTimeTag(userId, timeTag));
     }
 }

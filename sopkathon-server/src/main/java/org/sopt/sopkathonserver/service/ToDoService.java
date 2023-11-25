@@ -2,14 +2,19 @@ package org.sopt.sopkathonserver.service;
 
 import lombok.RequiredArgsConstructor;
 import org.sopt.sopkathonserver.controller.dto.request.ToDoCreateRequest;
+import org.sopt.sopkathonserver.controller.dto.response.ToDoGetResponse;
 import org.sopt.sopkathonserver.domain.ToDo;
 import org.sopt.sopkathonserver.domain.User;
+import org.sopt.sopkathonserver.domain.enums.TimeTag;
 import org.sopt.sopkathonserver.exception.ErrorMessage;
 import org.sopt.sopkathonserver.exception.model.NotFoundException;
 import org.sopt.sopkathonserver.repository.ToDoRepository;
 import org.sopt.sopkathonserver.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +23,7 @@ public class ToDoService {
 
     private final ToDoRepository toDoRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
     @Transactional
     public String create(ToDoCreateRequest request, Long userId) {
@@ -38,5 +44,14 @@ public class ToDoService {
                 () -> new NotFoundException(ErrorMessage.TODO_NOT_FOUND_ERROR)
         );
         toDoRepository.delete(toDo);
+    }
+
+    public List<ToDoGetResponse> findByTimeTag(Long userId, String timeTag) {
+        TimeTag timeTagValue = TimeTag.valueOf(timeTag);
+        User user = userService.findById(userId);
+        List<ToDo> toDoList = toDoRepository.findAllByUserAndTimeTag(user, timeTagValue);
+        return toDoList.stream().map(
+                ToDoGetResponse::of
+        ).collect(Collectors.toList());
     }
 }

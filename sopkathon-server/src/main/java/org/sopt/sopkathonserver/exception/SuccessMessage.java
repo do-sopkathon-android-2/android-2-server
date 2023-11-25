@@ -11,6 +11,7 @@ public enum SuccessMessage {
     TODO_DELETE_SUCCESS(HttpStatus.OK, "투두 내역이 삭제 되었습니다."),
     TODO_CREATE_SUCCESS(HttpStatus.CREATED, "할 일 등록이 완료되었습니다."),
     USER_TIME_SEARCH_SUCCESS(HttpStatus.OK, "사용자의 시간이 성공적으로 조회되었습니다."),
+    TODO_FILTERED_LIST_GET_SUCCESS(HttpStatus.OK, "필터링된 todo 조회를 성공하였습니다.")
     ;
     final HttpStatus status;
     final String message;
