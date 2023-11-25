@@ -1,5 +1,6 @@
 package org.sopt.sopkathonserver.domain.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,5 +11,6 @@ public enum TimeTag {
     LUNCH("lunch"),
     DINNER("dinner")
     ;
+    @JsonValue
     private String time;
 }

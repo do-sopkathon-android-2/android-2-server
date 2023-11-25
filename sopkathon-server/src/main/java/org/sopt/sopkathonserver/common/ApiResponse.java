@@ -15,6 +15,7 @@ public record ApiResponse<T>(
     public static <T> ApiResponse<T> success(SuccessMessage successMessage, T data) {
         return new ApiResponse(successMessage.getStatus().value(), successMessage.getMessage(), data);
     }
+
     public static ApiResponse error(ErrorMessage errorMessage) {
         return new ApiResponse(errorMessage.getStatus().value(), errorMessage.getMessage(), null);
     }

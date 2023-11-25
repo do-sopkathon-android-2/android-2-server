@@ -1,16 +1,17 @@
 package org.sopt.sopkathonserver.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.sopt.sopkathonserver.domain.enums.TimeTag;
 
 @Entity
+@Getter
+@NoArgsConstructor
 public class ToDo {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -20,5 +21,12 @@ public class ToDo {
 
     @Enumerated(EnumType.STRING)
     private TimeTag timeTag;
+
+    @Builder
+    public ToDo(String content, TimeTag timeTag, User user){
+        this.content = content;
+        this.timeTag = timeTag;
+        this.user = user;
+    }
 
 }
