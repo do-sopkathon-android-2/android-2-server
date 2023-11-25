@@ -15,7 +15,4 @@ public class User {
 
     @Id
     private Long id;
-
-    @OneToOne
-    private UserTime userTime;
 }
