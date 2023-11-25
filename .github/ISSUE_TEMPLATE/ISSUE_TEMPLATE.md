@@ -1,9 +1,4 @@
----
-name: "[feat] 이슈 템플릿"
-about: Suggest an idea for this project
-title: "[Type] 이슈 내용"
-labels: ''
-assignees: ''
+
 
 ---
 
