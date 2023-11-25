@@ -4,8 +4,10 @@ package org.sopt.sopkathonserver.controller;
 import lombok.RequiredArgsConstructor;
 import org.sopt.sopkathonserver.common.ApiResponse;
 import org.sopt.sopkathonserver.controller.dto.request.UserTimeRequestDto;
+import org.sopt.sopkathonserver.controller.dto.response.UserTimeGetResponse;
 import org.sopt.sopkathonserver.exception.SuccessMessage;
 import org.sopt.sopkathonserver.service.UserTimeService;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,5 +25,10 @@ public class UserTimeController {
     public ApiResponse createUserTime(@PathVariable final Long userId, @RequestBody final UserTimeRequestDto requestDto) {
         userTimeService.createUserTime(userId, requestDto);
         return ApiResponse.success(SuccessMessage.USER_TIME_CREATE_SUCCESS);
+    }
+
+    @GetMapping("/{userId}")
+    public ApiResponse<UserTimeGetResponse> getUserTime(@PathVariable final Long userId) {
+        return ApiResponse.success(SuccessMessage.USER_TIME_SEARCH_SUCCESS, userTimeService.getUserTime(userId));
     }
 }
