@@ -18,8 +18,6 @@ public class ToDo {
 
     private String content;
 
-    private boolean isDone;
-
     @Enumerated(EnumType.STRING)
     private TimeTag timeTag;
 
