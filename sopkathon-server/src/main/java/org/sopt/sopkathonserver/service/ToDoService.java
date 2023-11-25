@@ -2,6 +2,7 @@ package org.sopt.sopkathonserver.service;
 
 import lombok.RequiredArgsConstructor;
 import org.sopt.sopkathonserver.controller.dto.request.ToDoCreateRequest;
+import org.sopt.sopkathonserver.controller.dto.response.ToDoAllGetResponse;
 import org.sopt.sopkathonserver.controller.dto.response.ToDoGetResponse;
 import org.sopt.sopkathonserver.domain.ToDo;
 import org.sopt.sopkathonserver.domain.User;
@@ -20,6 +21,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class ToDoService {
+    private static String MORNING = "MORNING";
+    private static String LUNCH = "LUNCH";
+    private static String DINNER = "DINNER";
 
     private final ToDoRepository toDoRepository;
     private final UserRepository userRepository;
@@ -53,5 +57,12 @@ public class ToDoService {
         return toDoList.stream().map(
                 ToDoGetResponse::of
         ).collect(Collectors.toList());
+    }
+
+    public ToDoAllGetResponse findByUser(Long userId) {
+        List<ToDoGetResponse> morning = findByTimeTag(userId, MORNING);
+        List<ToDoGetResponse> lunch = findByTimeTag(userId, LUNCH);
+        List<ToDoGetResponse> dinner = findByTimeTag(userId, DINNER);
+        return ToDoAllGetResponse.of(morning, lunch, dinner);
     }
 }

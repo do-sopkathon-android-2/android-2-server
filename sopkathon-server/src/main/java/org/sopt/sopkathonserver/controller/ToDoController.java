@@ -3,6 +3,7 @@ package org.sopt.sopkathonserver.controller;
 import lombok.RequiredArgsConstructor;
 import org.sopt.sopkathonserver.common.ApiResponse;
 import org.sopt.sopkathonserver.controller.dto.request.ToDoCreateRequest;
+import org.sopt.sopkathonserver.controller.dto.response.ToDoAllGetResponse;
 import org.sopt.sopkathonserver.controller.dto.response.ToDoGetResponse;
 import org.sopt.sopkathonserver.exception.SuccessMessage;
 import org.sopt.sopkathonserver.service.ToDoService;
@@ -32,9 +33,13 @@ public class ToDoController {
         return ApiResponse.success(SuccessMessage.TODO_DELETE_SUCCESS);
     }
 
-
     @GetMapping("{userId}")
     public ApiResponse<List<ToDoGetResponse>> getToDos(@PathVariable Long userId, @RequestParam String timeTag) {
         return ApiResponse.success(SuccessMessage.TODO_FILTERED_LIST_GET_SUCCESS, toDoService.findByTimeTag(userId, timeTag));
+    }
+
+    @GetMapping("{userId}/all")
+    public ApiResponse<ToDoAllGetResponse> getAllToDos(@PathVariable Long userId) {
+        return ApiResponse.success(SuccessMessage.TODO_LIST_GET_SUCCESS, toDoService.findByUser(userId));
     }
 }
