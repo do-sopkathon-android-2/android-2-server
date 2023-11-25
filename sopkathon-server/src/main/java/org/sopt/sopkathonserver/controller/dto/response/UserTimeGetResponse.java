@@ -8,7 +8,7 @@ public record UserTimeGetResponse(
         int morningEnd,
         int lunchStart,
         int lunchEnd,
-        int dinnerStrat,
+        int dinnerStart,
         int dinnerEnd,
         int nightStart,
         int nightEnd
